@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ServiceStack;
 using ServiceStackMVC.Helpers;
 using ServiceStackMVC.Models.ViewModels;
 using ServiceStack.CacheAccess;
 using ServiceStack.ServiceClient.Web;
 using ServiceStack.ServiceInterface.Auth;
 using ServiceStackMVC.Models.ViewModels;
+using ServiceStack.WebHost.Endpoints;
 
 namespace ServiceStackMVC.Controllers
 {
@@ -26,15 +28,24 @@ namespace ServiceStackMVC.Controllers
         public ActionResult Login(LoginModel model, string returnUrl)
         {
             //var client = GlobalHelper.GetClient(base.Session);
-            var client = new JsonServiceClient(GlobalHelper.GetServiceUrl());
+            //var client = new JsonServiceClient(GlobalHelper.GetServiceUrl());
 
-            var response = client.Send<AuthResponse>(new Auth
-            {
-                provider = CredentialsAuthProvider.Name,
-                UserName = model.Username,
-                Password = model.Password,
-                RememberMe = true
-            });
+            //var response = client.Send<AuthResponse>(new Auth
+            //{
+            //    provider = CredentialsAuthProvider.Name,
+            //    UserName = model.Username,
+            //    Password = model.Password,
+            //    RememberMe = true
+            //});
+
+            var authService = AppHostBase.Resolve<AuthService>();
+            authService.RequestContext = System.Web.HttpContext.Current.ToRequestContext();
+            var response = authService.Authenticate(new Auth
+                                                        {
+                                                            UserName = model.Username,
+                                                            Password = model.Password,
+                                                            RememberMe = model.RememberMe
+                                                        });
 
             var cache = Cache;
             //base.UserSession = cache.

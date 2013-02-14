@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ServiceStack;
 using ServiceStackMVC.Helpers;
 using ServiceStackMVC.Models;
 using ServiceStackMVC.Services;
@@ -18,22 +19,22 @@ namespace ServiceStackMVC.Controllers
     {
         public ActionResult Index()
         {
-            var client = GlobalHelper.GetClient(Session);
+            //var client = GlobalHelper.GetClient(Session);
 
-            // Can see u user session in here
-            var cacheClient = Cache;
-            try
-            {
-                // Cannot get user session here
-                if (!base.UserSession.IsAuthenticated)
-                {
-                    var myCustomFoo = base.UserSession.CustomFoo;
-                    var isAuth = base.UserSession.IsAuthenticated;
-                    return RedirectToAction("Login", "Account");
-                }
+            //// Can see u user session in here
+            //var cacheClient = Cache;
+            //try
+            //{
+            //    // Cannot get user session here
+            //    if (!base.UserSession.IsAuthenticated)
+            //    {
+            //        var myCustomFoo = base.UserSession.CustomFoo;
+            //        var isAuth = base.UserSession.IsAuthenticated;
+            //        return RedirectToAction("Login", "Account");
+            //    }
 
-                var response = client.Get(new OrganizationCategories());
-                return View(response);
+            //    var response = client.Get(new OrganizationCategories());
+            //    return View(response);
                 //var sessionKey = SessionFeature.GetSessionKey();
                 //var userSession = SessionFeature.GetOrCreateSession<CustomUserSession>(CacheClient);
                 //var organizationCategoryService = AppHostBase.Resolve<OrganizationCategoriesService>();
@@ -41,9 +42,23 @@ namespace ServiceStackMVC.Controllers
                 //var response = organizationCategoryService.Get(new OrganizationCategories());
                 //return View(response);
 
-            }
-            catch (WebServiceException e)
+            //}
+            //catch (WebServiceException e)
+            //{
+            //    throw;
+            //}
+
+            try
             {
+                var orgCategoriesService = AppHostBase.Resolve<OrganizationCategoriesService>();
+                orgCategoriesService.RequestContext = System.Web.HttpContext.Current.ToRequestContext();
+                var response = orgCategoriesService.Get(new OrganizationCategories());
+                return View(response);
+
+            }
+            catch (Exception)
+            {
+                
                 throw;
             }
         }
