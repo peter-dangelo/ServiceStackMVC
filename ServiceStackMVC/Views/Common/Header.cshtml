@@ -1,0 +1,17 @@
+﻿@model ServiceStackMVC.Models.ViewModels.HeaderModel
+
+<h1>@Html.ActionLink("America 4 Animals", "Index", "Home")</h1>
+
+<section class="login">
+    @if (Model.IsLoggedIn)
+    {
+        <span>Hello, @Model.DisplayName</span>
+        <div class="logout">@Html.ActionLink("Logout", "Logout", "Account")</div>
+    }
+    else
+    {
+        <div>@Html.ActionLink("Login", "Login", "Account") OR @Html.ActionLink("Register", "Register", "Account")</div>
+    }
+
+</section>
+

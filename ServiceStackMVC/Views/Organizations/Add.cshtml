@@ -1,0 +1,12 @@
+﻿@model ServiceStackMVC.Models.ViewModels.OrganizationDetailModel
+
+@{
+    ViewBag.Title = "Add Organization";
+}
+
+<h2 class="page-header">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Add", "Organizations", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.Partial("AddOrEdit", Model)
+}
