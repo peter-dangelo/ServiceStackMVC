@@ -11,6 +11,7 @@
     else
     {
         <div>@Html.ActionLink("Login", "Login", "Account") OR @Html.ActionLink("Register", "Register", "Account")</div>
+        <div><a href="@Url.Content("~/api/auth/facebook")" id="facebookLoginLink">Login with Facebook</a></div>
     }
 
 </section>

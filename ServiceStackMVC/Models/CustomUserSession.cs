@@ -28,10 +28,7 @@ namespace ServiceStackMVC.Models
         {
             base.OnAuthenticated(authService, session, tokens, authInfo);
             CustomFoo = "SOMETHING CUSTOM";
-            session.IsAuthenticated = true;
-            authService.SaveSession(session);
 
-            //Cache.Add("MySession", this);
             //if (session.Email == null)
             //{
             //    session.Email = session.Email ?? tokens.Email;
