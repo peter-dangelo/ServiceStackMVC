@@ -9,28 +9,55 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
 </head>
-<body>
-    <div id="wrap">
-        <div class="container">
-            <header>
-                @Html.Action("Header", "Common")
-            </header>
+    <body>
+        <!-- facebook stuff -->
+        <div id="fb-root"></div>
+        
+        <script>
+            window.fbAsyncInit = function () {
+                // init the FB JS SDK
+                FB.init({
+                    appId: '420042971389061', // App ID from the App Dashboard
+                    status: true, // check the login status upon init?
+                    cookie: true, // set sessions cookies to allow your server to access the session?
+                    xfbml: true  // parse XFBML tags on this page?
+                });
+            };
 
-            <section class="row-fluid">
-                @RenderBody()
-            </section>
+            // Load the SDK's source Asynchronously
+            // Note that the debug version is being actively developed and might 
+            // contain some type checks that are overly strict. 
+            // Please report such bugs using the bugs tool.
+            (function (d, debug) {
+                var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+                if (d.getElementById(id)) { return; }
+                js = d.createElement('script'); js.id = id; js.async = true;
+                js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+                ref.parentNode.insertBefore(js, ref);
+            }(document, /*debug*/ false));
+        </script>
 
+        <div id="wrap">
+            <div class="container">
+                <header>
+                    @Html.Action("Header", "Common")
+                </header>
+
+                <section class="row-fluid">
+                    @RenderBody()
+                </section>
+
+            </div>
+            <div id="push"></div>
         </div>
-        <div id="push"></div>
-    </div>
-    <footer>
-        <div class="container">
-            <p>&copy; @DateTime.Now.Year - America For Animals</p>
-        </div>
-    </footer>
+        <footer>
+            <div class="container">
+                <p>&copy; @DateTime.Now.Year - America For Animals</p>
+            </div>
+        </footer>
 
 
-    @Scripts.Render("~/bundles/jqueryval", "~/bundles/jqueryui")
-</body>
+        @Scripts.Render("~/bundles/jqueryval", "~/bundles/jqueryui")
+    </body>
 </html>
 

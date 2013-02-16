@@ -63,6 +63,14 @@ namespace ServiceStackMVC.Controllers
             }
         }
 
+        public ActionResult IndexFromFacebook()
+        {
+            // Here use the Aspnet client
+            var serviceStackClient = GlobalHelper.ClientFromAspNetSession;
+            var response = serviceStackClient.Get(new OrganizationCategories());
+            return View("Index", response);
+        }
+
         public ActionResult Add()
         {
             var orgCategory = new OrganizationCategory();

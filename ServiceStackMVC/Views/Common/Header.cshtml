@@ -11,8 +11,55 @@
     else
     {
         <div>@Html.ActionLink("Login", "Login", "Account") OR @Html.ActionLink("Register", "Register", "Account")</div>
-        <div><a href="@Url.Content("~/api/auth/facebook")" id="facebookLoginLink">Login with Facebook</a></div>
+        <div><a href="@Url.Content("~/api/auth/facebook")">Login with Facebook</a></div>
+        
+        <!-- facebook login using the javascript sdk -->
+        <div><a href="#" id="facebookLoginLink">Login using the facebook javascript SDK</a></div>
     }
 
 </section>
+
+<script type="text/javascript">
+    
+    $(function () {
+        $('#facebookLoginLink').click(function () {
+            if (!FB) {
+                throw new Error("FB is undefined");
+            }
+
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    // connected
+                    var uid = response.authResponse.userID;
+                    var accessToken = response.authResponse.accessToken;
+                    var form = document.createElement("form");
+                    form.setAttribute("method", 'post');
+                    form.setAttribute("action", '/Facebook/Login');
+
+                    var field = document.createElement("input");
+                    field.setAttribute("type", "hidden");
+                    field.setAttribute("name", 'accessToken');
+                    field.setAttribute("value", accessToken);
+                    form.appendChild(field);
+
+                    field = document.createElement("input");
+                    field.setAttribute("type", "hidden");
+                    field.setAttribute("name", 'uid');
+                    field.setAttribute("value", uid);
+                    form.appendChild(field);
+
+                    document.body.appendChild(form);
+                    form.submit();
+                } else {
+                    // cancelled
+                }
+            }, {
+                "scope": 'email'
+            });
+
+            return false;
+        });
+    })
+
+</script>
 

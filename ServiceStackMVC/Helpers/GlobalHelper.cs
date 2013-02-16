@@ -15,6 +15,11 @@ namespace ServiceStackMVC.Helpers
             return ConfigurationManager.AppSettings["baseServiceUrl"];
         }
 
+        /// <summary>
+        /// Get a client from a servic stack session otherwise new up
+        /// </summary>
+        /// <param name="session"></param>
+        /// <returns></returns>
         public static JsonServiceClient GetClient(ISession session)
         {
             try
@@ -31,10 +36,27 @@ namespace ServiceStackMVC.Helpers
             }
             catch (Exception)
             {
-
                 return new JsonServiceClient(GlobalHelper.GetServiceUrl());
+            }        
+        }
+
+        public static JsonServiceClient ClientFromAspNetSession
+        {
+            get
+            {
+                var client = (JsonServiceClient)HttpContext.Current.Session["SsClient"];
+                if (client != null)
+                {
+                    return client;
+                }
+
+                client = new JsonServiceClient(GlobalHelper.GetServiceUrl());
+                HttpContext.Current.Session["SsClient"] = client;
+                return client;     
             }
-            
+
+            set { HttpContext.Current.Session["SsClient"] = value; }
+
         }
 
         private static JsonServiceClient GetSessionFromCookie()
