@@ -16,7 +16,6 @@ namespace ServiceStackMVC.Controllers
 {
     public class AccountController : ControllerBase
     {
-        public ICacheClient Cache { get; set; }
         public ActionResult Login()
         {
             ViewBag.ReturnUrl = "/OrganizationCategories";
@@ -27,8 +26,8 @@ namespace ServiceStackMVC.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
+            // This method resulted in incompatible cookies
             //var client = GlobalHelper.GetClient(base.Session);
-            //var client = new JsonServiceClient(GlobalHelper.GetServiceUrl());
 
             //var response = client.Send<AuthResponse>(new Auth
             //{
@@ -47,8 +46,6 @@ namespace ServiceStackMVC.Controllers
                                                             RememberMe = model.RememberMe
                                                         });
 
-            var cache = Cache;
-            //base.UserSession = cache.
             return RedirectToAction("Index", "OrganizationCategories");
         }
 
@@ -70,8 +67,6 @@ namespace ServiceStackMVC.Controllers
                 // Attempt to register the user
                 try
                 {
-                    //WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    //WebSecurity.Login(model.UserName, model.Password);
                     client.Post<RegistrationResponse>(new Registration
                                                           {
                                                               AutoLogin = true,
@@ -85,10 +80,6 @@ namespace ServiceStackMVC.Controllers
 
                     return RedirectToAction("Index", "OrganizationCategories");
                 }
-                    //catch (MembershipCreateUserException e)
-                    //{
-                    //    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                    //}
                 catch (Exception ex)
                 {
                     throw;
