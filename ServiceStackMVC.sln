@@ -3,16 +3,32 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackMVC", "ServiceStackMVC\ServiceStackMVC.csproj", "{DC8D1796-84F2-413B-90B6-40E809298CDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStack.ServiceInterface", "..\ServiceStack\src\ServiceStack.ServiceInterface\ServiceStack.ServiceInterface.csproj", "{5A315F92-80D2-4C60-A5A4-22E027AC7E7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		MonoTouch|Any CPU = MonoTouch|Any CPU
 		Release|Any CPU = Release|Any CPU
+		STATIC_ONLY NO_EXPRESSIONS|Any CPU = STATIC_ONLY NO_EXPRESSIONS|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DC8D1796-84F2-413B-90B6-40E809298CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC8D1796-84F2-413B-90B6-40E809298CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC8D1796-84F2-413B-90B6-40E809298CDC}.MonoTouch|Any CPU.ActiveCfg = Release|Any CPU
+		{DC8D1796-84F2-413B-90B6-40E809298CDC}.MonoTouch|Any CPU.Build.0 = Release|Any CPU
 		{DC8D1796-84F2-413B-90B6-40E809298CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC8D1796-84F2-413B-90B6-40E809298CDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC8D1796-84F2-413B-90B6-40E809298CDC}.STATIC_ONLY NO_EXPRESSIONS|Any CPU.ActiveCfg = Release|Any CPU
+		{DC8D1796-84F2-413B-90B6-40E809298CDC}.STATIC_ONLY NO_EXPRESSIONS|Any CPU.Build.0 = Release|Any CPU
+		{5A315F92-80D2-4C60-A5A4-22E027AC7E7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A315F92-80D2-4C60-A5A4-22E027AC7E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A315F92-80D2-4C60-A5A4-22E027AC7E7E}.MonoTouch|Any CPU.ActiveCfg = MonoTouch|Any CPU
+		{5A315F92-80D2-4C60-A5A4-22E027AC7E7E}.MonoTouch|Any CPU.Build.0 = MonoTouch|Any CPU
+		{5A315F92-80D2-4C60-A5A4-22E027AC7E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A315F92-80D2-4C60-A5A4-22E027AC7E7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A315F92-80D2-4C60-A5A4-22E027AC7E7E}.STATIC_ONLY NO_EXPRESSIONS|Any CPU.ActiveCfg = STATIC_ONLY NO_EXPRESSIONS|Any CPU
+		{5A315F92-80D2-4C60-A5A4-22E027AC7E7E}.STATIC_ONLY NO_EXPRESSIONS|Any CPU.Build.0 = STATIC_ONLY NO_EXPRESSIONS|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

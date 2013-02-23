@@ -14,6 +14,7 @@ namespace ServiceStackMVC.Models
         public CustomRegistrationValidator()
         {
             RuleSet(ApplyTo.Post, () => RuleFor(x => x.DisplayName).NotEmpty());
+            RuleSet(ApplyTo.All, () => RuleFor(x => x.UserName).EmailAddress());
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
@@ -150,6 +151,7 @@ namespace ServiceStackMVC.App_Start
                 new OrmLiteAuthRepository(c.Resolve<IDbConnectionFactory>()));
 
             var authRepo = (OrmLiteAuthRepository)container.Resolve<IUserAuthRepository>();
+            authRepo.ValidUserNameRegEx = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             authRepo.CreateMissingTables();
         }
 

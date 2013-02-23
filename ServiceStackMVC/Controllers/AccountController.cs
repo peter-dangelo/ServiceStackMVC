@@ -77,7 +77,7 @@ namespace ServiceStackMVC.Controllers
                                                               FirstName = model.FirstName,
                                                               LastName = model.LastName,
                                                               Password = model.Password,
-                                                              UserName = model.DisplayName
+                                                              UserName = model.Email
                                                           });
 
                     return RedirectToAction("Index", "OrganizationCategories");
